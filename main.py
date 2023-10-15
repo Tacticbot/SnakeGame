@@ -13,6 +13,7 @@ screen.tracer(0)
 
 snake = Snake()
 food = Food()
+
 score = ScoreBoard()
 
 screen.listen()
@@ -30,16 +31,18 @@ while move:
     snake.move()
     for i in range(1, len(snake.segments)):
         if snake.head.distance(snake.segments[i]) < 10:
+            score.reset()
             score.end()
             move =False
+            
     if (snake.head.xcor() >= 290 or snake.head.xcor() <= -290) or (snake.head.ycor() >= 290 or snake.head.ycor() <= -290):
+        score.reset()
         score.end()
         move = False
     if snake.head.distance(food) <15:
         food.refresh()
-        if food.refresh:
-            score.count()
-            snake.grow()
+        score.count()
+        snake.grow()
 
     
 
